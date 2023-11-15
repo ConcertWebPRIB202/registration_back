@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu/postgres
 
 
 RUN apt-get update && apt-get upgrade -y
@@ -9,10 +9,6 @@ RUN add-apt-repository ppa:ondrej/php
 ENV TZ=Europe/Volgograd
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-RUN sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-RUN apt-get update && apt-get install postgresql-12 postgresql-client-12 -y
 
 RUN apt-get install php8.2 -y
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -25,6 +21,6 @@ ENV LANG en_US.utf8
 
 COPY . registration_back
 
-RUN /etc/init.d/postgresql start && cd registration_back/database/dump && psql -U postgres user_data < user_data.sql
+RUN cd registration_back/database/dump && psql -U postgres user_data < user_data.sql
 
 CMD cd registration_back && artisan serve
