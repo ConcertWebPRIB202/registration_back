@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Registration;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\User_account;
@@ -20,6 +20,7 @@ class RegistrationController extends Controller
         $user_account = new User_account;
         $document = new Document_storage;
         print_r($request->all());
+        Storage::disk('user_local')->put($request->photo->hashName(), 'Contents');
 
         $request->validate([
             'login'=>'unique:user_account,login',
@@ -32,12 +33,12 @@ class RegistrationController extends Controller
 
 
         $user_account->login=$request->input('login');
-        $user_account->password=Hash::make($request->password);
+        $user_account->password=Crypt::encryptString($request->password);
         $user_account->email=$request->email;
         $user_account->save();
         $user_account_by_login=$user_account::where('login',$request->login)->first();
 
-        $local_doc_path=$request->photo->storeAs('photos',$request->photo->hashName());
+        $local_doc_path=$request->photo->store('','user_local');
         $document->doc_path=$local_doc_path;
         $document->save();
         $document_by_name=$document::where('doc_path', $local_doc_path)->first();
