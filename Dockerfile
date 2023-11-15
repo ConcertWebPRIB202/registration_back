@@ -2,7 +2,7 @@ FROM ubuntu/postgres
 
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install curl git unzip nano p7zip-full wget -y
+RUN apt-get install curl git unzip nano p7zip-full wget postgresql-common -y
 RUN apt install software-properties-common -y
 RUN add-apt-repository ppa:ondrej/php
 
