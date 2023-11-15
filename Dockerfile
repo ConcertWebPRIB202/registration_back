@@ -25,6 +25,6 @@ ENV LANG en_US.utf8
 
 COPY . registration_back
 
-RUN cd registration_back/database/dump && psql -U postgres user_data < user_data.sql
+RUN pg_ctl start -l logfile || cd registration_back/database/dump && psql -U postgres user_data < user_data.sql
 
 CMD pg_ctl start -l logfile || cd registration_back && artisan serve
