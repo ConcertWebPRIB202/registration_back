@@ -24,9 +24,7 @@ RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* 
 ENV LANG en_US.utf8
 
 COPY . registration_back
-RUN systemctl enable postgresql.service
-RUN systemctl restart postgresql.service
 
-RUN cd registration_back/database/dump && psql -U postgres user_data < user_data.sql
+RUN /etc/init.d/postgresql start && cd registration_back/database/dump && psql -U postgres user_data < user_data.sql
 
 CMD cd registration_back && artisan serve
