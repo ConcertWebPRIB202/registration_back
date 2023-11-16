@@ -22,12 +22,12 @@ class RegistrationController extends Controller
         $document = new Document_storage;
 
         $validator=Validator::make($request->all(),[
-            'login'=>'unique:user_account,login',
-            'password' => [Password::min(8)->mixedCase()->numbers()->uncompromised()],
-            'repeat_password' => 'same:password',
-            'phone' => 'size:12',
-            'email' => ['email','unique:user_account,email'],
-            'photo' => ['image']
+            'login'=>['unique:user_account,login','required'],
+            'password' => [Password::min(8)->mixedCase()->numbers()->uncompromised(),'required'],
+            'repeat_password' => ['same:password','required'],
+            'phone' => ['size:12','required'],
+            'email' => ['email','unique:user_account,email','required'],
+            'photo' => ['image','required']
         ]);
         if($validator->fails())
         {
