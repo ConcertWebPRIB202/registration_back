@@ -14,4 +14,3 @@ Route::get('/token', function () {
 Route::get('/spath', function () {
     return storage_path('app');
 });
-Route::post('/email', [RegistrationController::class,'email_verify']);
