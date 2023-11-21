@@ -55,4 +55,17 @@ class RegistrationController extends Controller
             return response('Successfully registered user', 201);
         }
     }
+    public function email_verify(Request $request)
+    {
+        $validator=Validator::make($request->all(),[
+            'email' => ['email:rfc,dns','unique:user_account,email','required'],
+        ]);
+        if($validator->fails())
+        {
+            return response('Bad request', 400);
+        }
+        else{
+            return response('Successfully registered user', 201);
+        }
+    }
 }
