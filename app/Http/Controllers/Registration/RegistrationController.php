@@ -16,7 +16,11 @@ class RegistrationController extends Controller
 {
     public function create(Request $request)
     {
-        
+        // if($request->all())
+        // {
+        //     print_r($request->all());
+        //     return response('ok', 201);
+        // }
         $user = new User;
         $user_account = new User_account;
         $document = new Document_storage;
