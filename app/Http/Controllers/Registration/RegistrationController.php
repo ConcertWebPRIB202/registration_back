@@ -22,7 +22,7 @@ class RegistrationController extends Controller
 
         $validator=Validator::make($request->all(),[
             'login'=>['unique:user_account,login','required'],
-            'password' => [Password::min(8)->mixedCase()->numbers()->uncompromised(),'required'],
+            'password' => [Password::min(8)->mixedCase()->numbers(),'required'],
             'repeat_password' => ['same:password','required'],
             'phone' => ['size:12','required'],
             'email' => ['email:rfc,dns','unique:user_account,email','required'],
@@ -30,7 +30,7 @@ class RegistrationController extends Controller
         ]);
         if($validator->fails())
         {
-            return response('Bad request', 400);
+            return response('Bad request', 202);
         }
         else
         {
