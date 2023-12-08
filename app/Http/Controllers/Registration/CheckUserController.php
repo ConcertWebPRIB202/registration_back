@@ -19,7 +19,7 @@ class CheckUserController extends Controller
             $User_exist=User_account::where('login',$request->login)->count();
             if ($User_exist==0)
             {
-                return response('User not found', 204);
+                return response('User not found', 203);
             }
             else if($User_exist>=0)
             {

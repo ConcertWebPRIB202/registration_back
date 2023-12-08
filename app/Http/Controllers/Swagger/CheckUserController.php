@@ -21,7 +21,7 @@ use App\Http\Controllers\Controller;
  *          description="User found"
  *      ),
  *      @OA\Response(
- *          response=204,
+ *          response=203,
  *          description="User not found"
  *      ),
  *      @OA\Response(

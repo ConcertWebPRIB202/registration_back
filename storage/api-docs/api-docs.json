@@ -27,7 +27,7 @@
                     "200": {
                         "description": "User found"
                     },
-                    "204": {
+                    "203": {
                         "description": "User not found"
                     },
                     "201": {
