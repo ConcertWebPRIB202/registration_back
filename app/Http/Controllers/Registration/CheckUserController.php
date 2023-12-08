@@ -12,14 +12,14 @@ class CheckUserController extends Controller
     {
         if (!$request->login)
         {
-            return response('Bad request', 400);
+            return response('Bad request', 201);
         }
         else
         {
             $User_exist=User_account::where('login',$request->login)->count();
             if ($User_exist==0)
             {
-                return response('User not found', 404);
+                return response('User not found', 204);
             }
             else if($User_exist>=0)
             {

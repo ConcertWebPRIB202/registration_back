@@ -16,18 +16,13 @@ class RegistrationController extends Controller
 {
     public function create(Request $request)
     {
-        // if($request->all())
-        // {
-        //     print_r($request->all());
-        //     return response('ok', 201);
-        // }
         $user = new User;
         $user_account = new User_account;
         $document = new Document_storage;
 
         $validator=Validator::make($request->all(),[
             'login'=>['unique:user_account,login','required'],
-            'password' => [Password::min(8)->mixedCase()->numbers()->uncompromised(),'required'],
+            'password' => [Password::min(8)->mixedCase()->numbers(),'required'],
             'repeat_password' => ['same:password','required'],
             'phone' => ['size:12','required'],
             'email' => ['email:rfc,dns','unique:user_account,email','required'],
@@ -35,7 +30,7 @@ class RegistrationController extends Controller
         ]);
         if($validator->fails())
         {
-            return response('Bad request', 400);
+            return response('Bad request', 202);
         }
         else
         {

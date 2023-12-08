@@ -21,11 +21,11 @@ use App\Http\Controllers\Controller;
  *          description="User found"
  *      ),
  *      @OA\Response(
- *          response=404,
+ *          response=204,
  *          description="User not found"
  *      ),
  *      @OA\Response(
- *          response=400,
+ *          response=201,
  *          description="Bad request"
  *      ),
  *  ),

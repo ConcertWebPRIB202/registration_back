@@ -54,7 +54,7 @@ use App\Http\Controllers\Controller;
  *          description="Successfully registered user"
  *      ),
  *      @OA\Response(
- *          response=400,
+ *          response=202,
  *          description="Bad request"
  *      ),
  *  ),
