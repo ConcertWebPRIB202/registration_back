@@ -30,7 +30,7 @@ class RegistrationController extends Controller
         ]);
         if($validator->fails())
         {
-            return response('Bad request', 202);
+            return response('Bad request', 400);
         }
         else
         {
