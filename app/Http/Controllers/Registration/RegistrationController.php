@@ -51,6 +51,7 @@ class RegistrationController extends Controller
             $user->document_id=$document_by_name->id;
             $user->account_id=$user_account_by_login->id;
             $user->save();
+            $user_account-> createToken('api-token');
             return response('Successfully registered user', 201);
         }
     }
